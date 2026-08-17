@@ -116,7 +116,7 @@ function App() {
     });
 
     newSocket.on('connect', () => {
-      console.log('🔌 Connected to socket');
+      console.log('Connected to socket');
       // Tell the server this user is online
       newSocket.emit('userOnline', user.id);
     });
@@ -282,7 +282,7 @@ function App() {
       <div className="auth-container">
         <div className="auth-card">
           <div className="auth-header">
-            <h1>💬 ChatApp</h1>
+            <h1>Quick Chat</h1>
             <p>Real-time messaging</p>
           </div>
 
@@ -343,9 +343,9 @@ function App() {
       {/* ---- Sidebar: User List ---- */}
       <div className={`sidebar ${showSidebar ? 'show' : ''}`}>
         <div className="sidebar-header">
-          <h2>💬 Chats</h2>
+          <h2>Chats</h2>
           <div className="sidebar-user-info">
-            <span className="current-user">👤 {user.username}</span>
+            <span className="current-user">{user.username}</span>
             <button onClick={handleLogout} className="logout-btn">Logout</button>
           </div>
         </div>
@@ -363,7 +363,7 @@ function App() {
               <div className="user-info">
                 <span className="user-name">{u.username}</span>
                 <span className={`user-status ${onlineUsers.includes(u._id) ? 'online' : 'offline'}`}>
-                  {onlineUsers.includes(u._id) ? '🟢 Online' : '⚪ Offline'}
+                  {onlineUsers.includes(u._id) ? 'Online' : 'Offline'}
                 </span>
               </div>
             </div>
@@ -385,7 +385,7 @@ function App() {
               <div className="chat-header-info">
                 <h3>{selectedUser.username}</h3>
                 <span className={`header-status ${onlineUsers.includes(selectedUser._id) ? 'online' : 'offline'}`}>
-                  {onlineUsers.includes(selectedUser._id) ? '🟢 Online' : '⚪ Offline'}
+                  {onlineUsers.includes(selectedUser._id) ? 'Online' : 'Offline'}
                 </span>
               </div>
             </div>
@@ -443,7 +443,11 @@ function App() {
           </>
         ) : (
           <div className="no-chat-selected">
-            <div className="no-chat-icon">💬</div>
+            <div className="no-chat-icon">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z" fill="currentColor"/>
+              </svg>
+            </div>
             <h2>Welcome, {user.username}!</h2>
             <p>Select a user to start chatting</p>
           </div>
