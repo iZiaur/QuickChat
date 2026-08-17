@@ -1,6 +1,6 @@
 # 💬 Real-Time Chat Application
 
-A minimal, interview-ready 1-to-1 real-time chat application.
+A minimal 1-to-1 real-time chat application.
 
 ## Tech Stack
 
