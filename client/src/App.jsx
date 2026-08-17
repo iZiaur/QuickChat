@@ -282,6 +282,12 @@ function App() {
   if (!token) {
     return (
       <div className="auth-container">
+        {/* Abstract Background Video */}
+        <video autoPlay loop muted playsInline className="auth-bg-video">
+          <source src="https://assets.codepen.io/3364143/7btrrd.mp4" type="video/mp4" />
+        </video>
+        <div className="auth-bg-overlay"></div>
+
         <div className="auth-card">
           <div className="auth-header">
             <div className="auth-logo">
