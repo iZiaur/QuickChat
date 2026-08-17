@@ -282,6 +282,11 @@ function App() {
       <div className="auth-container">
         <div className="auth-card">
           <div className="auth-header">
+            <div className="auth-logo">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3L2 12H5V20H19V12H22L12 3Z" fill="currentColor"/>
+              </svg>
+            </div>
             <h1>Quick Chat</h1>
             <p>Real-time messaging</p>
           </div>
@@ -336,122 +341,218 @@ function App() {
   }
 
   // ============================================================
-  // RENDER: Chat Application
+  // RENDER: Chat Application (Dribbble Layout)
   // ============================================================
   return (
     <div className="chat-app">
-      {/* ---- Sidebar: User List ---- */}
-      <div className={`sidebar ${showSidebar ? 'show' : ''}`}>
-        <div className="sidebar-header">
-          <h2>Chats</h2>
-          <div className="sidebar-user-info">
-            <span className="current-user">{user.username}</span>
-            <button onClick={handleLogout} className="logout-btn">Logout</button>
-          </div>
-        </div>
-
-        <div className="user-list">
-          {users.map((u) => (
-            <div
-              key={u._id}
-              className={`user-item ${selectedUser?._id === u._id ? 'active' : ''}`}
-              onClick={() => { setSelectedUser(u); setShowSidebar(false); setTypingUser(null); }}
-            >
-              <div className="user-avatar">
-                {u.username.charAt(0).toUpperCase()}
-              </div>
-              <div className="user-info">
-                <span className="user-name">{u.username}</span>
-                <span className={`user-status ${onlineUsers.includes(u._id) ? 'online' : 'offline'}`}>
-                  {onlineUsers.includes(u._id) ? 'Online' : 'Offline'}
-                </span>
-              </div>
-            </div>
-          ))}
-
-          {users.length === 0 && (
-            <div className="no-users">No other users yet. Ask someone to register!</div>
-          )}
-        </div>
-      </div>
-
-      {/* ---- Chat Area ---- */}
-      <div className="chat-area">
-        {selectedUser ? (
-          <>
-            {/* Chat Header */}
-            <div className="chat-header">
-              <button className="back-btn" onClick={() => setShowSidebar(true)}>←</button>
-              <div className="chat-header-info">
-                <h3>{selectedUser.username}</h3>
-                <span className={`header-status ${onlineUsers.includes(selectedUser._id) ? 'online' : 'offline'}`}>
-                  {onlineUsers.includes(selectedUser._id) ? 'Online' : 'Offline'}
-                </span>
-              </div>
-            </div>
-
-            {/* Messages */}
-            <div className="messages-container">
-              {messages.map((msg, index) => (
-                <div
-                  key={msg._id || index}
-                  className={`message ${msg.sender === user.id ? 'sent' : 'received'}`}
-                >
-                  <div className="message-bubble">
-                    <p className="message-text">{msg.text}</p>
-                    <div className="message-meta">
-                      <span className="message-time">
-                        {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                      </span>
-                      {msg.sender === user.id && (
-                        <span className={`message-status ${msg.status}`}>
-                          {getStatusIcon(msg.status)}
-                          {msg.status === 'read' && ' Read'}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
-
-              {/* Typing Indicator */}
-              {typingUser && typingUser.senderId === selectedUser._id && (
-                <div className="typing-indicator">
-                  <div className="typing-dots">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span>{typingUser.senderName} is typing...</span>
-                </div>
-              )}
-
-              <div ref={messagesEndRef} />
-            </div>
-
-            {/* Message Input */}
-            <form onSubmit={sendMessage} className="message-input-form">
-              <input
-                type="text"
-                placeholder="Type a message..."
-                value={newMessage}
-                onChange={handleTyping}
-                className="message-input"
-              />
-              <button type="submit" className="send-btn" disabled={!newMessage.trim()}>
-                Send
-              </button>
-            </form>
-          </>
-        ) : (
-          <div className="no-chat-selected">
-            <div className="no-chat-icon">
-              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z" fill="currentColor"/>
+      <div className="app-container">
+        {/* ---- Slim Left Nav ---- */}
+        <div className="slim-nav">
+          <div className="nav-top">
+            <div className="brand-logo">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3L2 12H5V20H19V12H22L12 3Z" fill="var(--primary)"/>
               </svg>
             </div>
-            <h2>Welcome, {user.username}!</h2>
-            <p>Select a user to start chatting</p>
+            <div className="nav-item active">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
+            <div className="nav-item">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div className="nav-item">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+            </div>
           </div>
-        )}
+          <div className="nav-bottom">
+            <button className="nav-item logout-icon" onClick={handleLogout} title="Logout">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* ---- Middle Sidebar (Chat List) ---- */}
+        <div className={`sidebar ${showSidebar ? 'show' : ''}`}>
+          
+          <div className="sidebar-profile">
+            <div className="profile-header">
+              <h2>Chat</h2>
+              <button className="settings-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+              </button>
+            </div>
+            
+            <div className="my-profile">
+              <div className="my-avatar">
+                {user.username.charAt(0).toUpperCase()}
+                <div className="status-dot"></div>
+              </div>
+              <h3>{user.username}</h3>
+              <div className="availability-badge">Available ▾</div>
+            </div>
+
+            <div className="search-bar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" placeholder="Search" />
+            </div>
+          </div>
+
+          <div className="last-chats-header">
+            <h4>Last chats</h4>
+            <button className="add-chat-btn">+</button>
+          </div>
+
+          <div className="user-list">
+            {users.map((u) => (
+              <div
+                key={u._id}
+                className={`user-item ${selectedUser?._id === u._id ? 'active' : ''}`}
+                onClick={() => { setSelectedUser(u); setShowSidebar(false); setTypingUser(null); }}
+              >
+                <div className="user-avatar-small">
+                  {u.username.charAt(0).toUpperCase()}
+                  {onlineUsers.includes(u._id) && <div className="online-dot-small"></div>}
+                </div>
+                <div className="user-info">
+                  <div className="user-name-row">
+                    <span className="user-name">{u.username}</span>
+                    <span className="time-placeholder">11:15</span>
+                  </div>
+                  <span className="user-status-text">
+                     {onlineUsers.includes(u._id) ? 'Online right now' : 'Away'}
+                  </span>
+                </div>
+              </div>
+            ))}
+
+            {users.length === 0 && (
+              <div className="no-users">No other users yet.</div>
+            )}
+          </div>
+        </div>
+
+        {/* ---- Main Chat Area ---- */}
+        <div className="chat-area">
+          {selectedUser ? (
+            <>
+              {/* Chat Header */}
+              <div className="chat-header">
+                <button className="back-btn" onClick={() => setShowSidebar(true)}>←</button>
+                <div className="chat-header-info">
+                  <h3>{selectedUser.username}</h3>
+                  <div className="header-tabs">
+                    <button className="tab active">Messages</button>
+                    <button className="tab">Participants</button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Messages */}
+              <div className="messages-container">
+                {messages.map((msg, index) => {
+                  const isSent = msg.sender === user.id;
+                  return (
+                    <div
+                      key={msg._id || index}
+                      className={`message-wrapper ${isSent ? 'sent-wrapper' : 'received-wrapper'}`}
+                    >
+                      {!isSent && (
+                        <div className="msg-avatar">
+                           {selectedUser.username.charAt(0).toUpperCase()}
+                        </div>
+                      )}
+                      
+                      <div className={`message ${isSent ? 'sent' : 'received'}`}>
+                        <span className="msg-name-time">
+                          {isSent ? 'You' : selectedUser.username}, {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        </span>
+                        <div className="message-bubble">
+                          <p className="message-text">{msg.text}</p>
+                          {isSent && (
+                            <span className={`message-status ${msg.status}`}>
+                              {getStatusIcon(msg.status)}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {/* Typing Indicator */}
+                {typingUser && typingUser.senderId === selectedUser._id && (
+                  <div className="message-wrapper received-wrapper">
+                    <div className="msg-avatar">
+                       {selectedUser.username.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="typing-indicator">
+                      <div className="typing-dots">
+                        <span></span><span></span><span></span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <div ref={messagesEndRef} />
+              </div>
+
+              {/* Message Input Pill */}
+              <div className="input-wrapper">
+                <form onSubmit={sendMessage} className="message-input-form">
+                  <input
+                    type="text"
+                    placeholder="Write your message..."
+                    value={newMessage}
+                    onChange={handleTyping}
+                    className="message-input"
+                  />
+                  <div className="input-actions">
+                    <button type="button" className="icon-btn">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                        <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                        <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                      </svg>
+                    </button>
+                    <button type="button" className="icon-btn">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                      </svg>
+                    </button>
+                    <button type="submit" className="send-btn" disabled={!newMessage.trim()}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                      </svg>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </>
+          ) : (
+            <div className="no-chat-selected">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="1" strokeDasharray="4 2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <h2>Select a conversation</h2>
+              <p>Choose a chat from the sidebar to start messaging.</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
