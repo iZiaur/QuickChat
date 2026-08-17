@@ -80,6 +80,8 @@ function App() {
     setSelectedUser(null);
     setMessages([]);
     setUsers([]);
+    setAuthForm({ username: '', email: '', password: '' });
+    setAuthError('');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     if (socket) socket.disconnect();
