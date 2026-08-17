@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ==========================================================================
-   CSS Variables for Premium Theme
+   CSS Variables for Premium Obsidian & Emerald Theme
    ========================================================================== */
 :root {
-  --bg-dark: #0f172a;       /* Deep slate background */
-  --bg-panel: #1e293b;      /* Slightly lighter panel background */
-  --bg-hover: #334155;
+  --bg-dark: #09090b;       /* Pure dark zinc (almost black) */
+  --bg-panel: #18181b;      /* Dark gray panel */
+  --bg-hover: #27272a;      /* Hover state gray */
   
-  --primary: #6366f1;       /* Vibrant Indigo */
-  --primary-hover: #4f46e5;
+  --primary: #10b981;       /* Vibrant Emerald */
+  --primary-hover: #059669; /* Darker Emerald */
   
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
+  --text-main: #fafafa;     /* Crisp white */
+  --text-muted: #a1a1aa;    /* Subtle gray */
   
   --accent-green: #10b981;  /* Emerald green for online status */
   --accent-red: #ef4444;    /* Red for errors */
@@ -20,7 +20,7 @@
   --border-color: rgba(255, 255, 255, 0.08);
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
   
   --radius-md: 12px;
   --radius-lg: 16px;
@@ -70,11 +70,11 @@ input {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, var(--bg-dark) 70%);
+  background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.15) 0%, var(--bg-dark) 60%);
 }
 
 .auth-card {
-  background-color: rgba(30, 41, 59, 0.7);
+  background-color: rgba(24, 24, 27, 0.8);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   padding: 2.5rem;
@@ -100,9 +100,8 @@ input {
   font-size: 1.75rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  background: linear-gradient(to right, #818cf8, #c084fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
 }
 
 .auth-header p {
@@ -112,7 +111,7 @@ input {
 
 .auth-tabs {
   display: flex;
-  background-color: rgba(15, 23, 42, 0.6);
+  background-color: rgba(9, 9, 11, 0.6);
   border-radius: var(--radius-md);
   padding: 4px;
   margin-bottom: 2rem;
@@ -129,7 +128,7 @@ input {
 
 .auth-tab.active {
   background-color: var(--primary);
-  color: white;
+  color: #fff;
   box-shadow: var(--shadow-sm);
 }
 
@@ -143,7 +142,7 @@ input {
   padding: 0.875rem 1rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
-  background-color: rgba(15, 23, 42, 0.4);
+  background-color: rgba(9, 9, 11, 0.4);
   color: var(--text-main);
   font-size: 0.95rem;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -151,18 +150,18 @@ input {
 
 .auth-form input:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
 }
 
 .auth-form input::placeholder {
-  color: #475569;
+  color: #52525b;
 }
 
 .auth-submit {
   padding: 0.875rem;
   border-radius: var(--radius-md);
   background-color: var(--primary);
-  color: white;
+  color: #fff;
   font-weight: 600;
   font-size: 0.95rem;
   margin-top: 0.5rem;
@@ -212,13 +211,14 @@ input {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
+  letter-spacing: -0.5px;
 }
 
 .sidebar-user-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(15, 23, 42, 0.5);
+  background-color: rgba(9, 9, 11, 0.5);
   padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
 }
@@ -238,7 +238,7 @@ input {
   height: 24px;
   background-color: var(--primary);
   border-radius: 50%;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .logout-btn {
@@ -292,15 +292,15 @@ input {
 }
 
 .user-item.active {
-  background-color: rgba(99, 102, 241, 0.1);
-  border-color: rgba(99, 102, 241, 0.2);
+  background-color: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.2);
 }
 
 .user-avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #6366f1, #a855f7);
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -344,7 +344,7 @@ input {
 }
 
 .user-status.offline::before {
-  background-color: #475569;
+  background-color: #52525b;
 }
 
 .no-users {
@@ -360,7 +360,7 @@ input {
   display: flex;
   flex-direction: column;
   position: relative;
-  background: radial-gradient(circle at top right, rgba(30, 41, 59, 0.5), var(--bg-dark));
+  background: radial-gradient(circle at top right, rgba(24, 24, 27, 0.5), var(--bg-dark));
 }
 
 .no-chat-selected {
@@ -374,7 +374,7 @@ input {
 
 .no-chat-icon {
   margin-bottom: 1.5rem;
-  color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.05);
 }
 
 .no-chat-selected h2 {
@@ -382,11 +382,12 @@ input {
   color: var(--text-main);
   margin-bottom: 0.5rem;
   font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 .chat-header {
   padding: 1.25rem 1.5rem;
-  background-color: rgba(30, 41, 59, 0.8);
+  background-color: rgba(24, 24, 27, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
@@ -464,10 +465,10 @@ input {
 }
 
 .message.sent .message-bubble {
-  background: linear-gradient(135deg, var(--primary), #818cf8);
-  color: white;
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  color: #fff;
   border-bottom-right-radius: 4px;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
 .message.received .message-bubble {
@@ -503,7 +504,7 @@ input {
 /* ---- Input Area ---- */
 .message-input-form {
   padding: 1.25rem 1.5rem;
-  background-color: rgba(30, 41, 59, 0.8);
+  background-color: rgba(24, 24, 27, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-top: 1px solid var(--border-color);
@@ -516,7 +517,7 @@ input {
   padding: 0.875rem 1.25rem;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-color);
-  background-color: rgba(15, 23, 42, 0.6);
+  background-color: rgba(9, 9, 11, 0.6);
   color: var(--text-main);
   font-size: 0.95rem;
   transition: all 0.2s;
@@ -524,14 +525,14 @@ input {
 
 .message-input:focus {
   border-color: var(--primary);
-  background-color: rgba(15, 23, 42, 0.8);
+  background-color: rgba(9, 9, 11, 0.8);
 }
 
 .send-btn {
   padding: 0 1.5rem;
   border-radius: var(--radius-full);
   background-color: var(--primary);
-  color: white;
+  color: #fff;
   font-weight: 600;
   transition: all 0.2s;
 }
@@ -544,7 +545,7 @@ input {
 .send-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  background-color: #475569;
+  background-color: #3f3f46;
 }
 
 /* ---- Typing Indicator ---- */
